@@ -1,11 +1,25 @@
 import { Component } from 'react';
 import Container from '../components/Container';
 
-const styles = {
+const inputStyles = {
   padding: '10px',
+  marginBottom: '10px',
   fontSize: '16px',
-  display: 'block'
+  display: 'block',
+  border: '1px solid #ccc'
 };
+
+const buttonStyles = {
+  border: 'none',
+  display: 'inline-block',
+  padding: '8px 16px',
+  verticalAlign: 'middle',
+  overflow: 'hidden',
+  textDecoration: 'none',
+  textAlign: 'center',
+  cursor: 'pointer',
+  whiteSpace: 'nowrap',
+}
 
 class Admin extends Component {
   render() {
@@ -13,10 +27,13 @@ class Admin extends Component {
       <Container>
         <div>
           <h1>Admin Page</h1>
-          <div>
-            <input type="text" style={styles}/>
-            <input type="password" style={styles}/>
-          </div>
+          <form>
+            <label>Name</label>
+            <input type="text" style={inputStyles} />
+            <label>Password</label>
+            <input type="password" style={inputStyles} />
+            <button style={buttonStyles}>Submit</button>
+          </form>
         </div>
       </Container>
     );
