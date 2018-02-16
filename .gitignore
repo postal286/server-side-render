@@ -1,3 +1,4 @@
 # ignore dependencies
 node_modules
 .next
+.idea
