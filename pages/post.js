@@ -1,5 +1,6 @@
 import Layout from '../components/MyLayout.js';
 import fetch from 'isomorphic-unfetch';
+import
 
 const Post = (props) => (
   <Layout>
@@ -15,6 +16,6 @@ Post.getInitialProps = async function (context) {
   const show = await res.json();
 
   return { show };
-}
+};
 
 export default Post;
