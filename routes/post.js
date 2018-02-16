@@ -1,4 +1,4 @@
-export default (server, app) => {
+module.exports = function(server, app) {
 
   server.get('/p/:id', (req, res) => {
     const actualPage = '/post';

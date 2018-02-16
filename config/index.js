@@ -1,6 +1,6 @@
 const dataBaseName = require('../seed');
 
-module.exports = (server, mongoose) => {
+module.exports = function (server, mongoose) {
 
   server.set(dataBaseName, `mongodb://localhost:27017/${dataBaseName}`);
 
