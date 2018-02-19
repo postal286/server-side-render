@@ -1,11 +1,12 @@
-const styles = {
-  margin: '20px auto',
-  width: '1200px',
-  textAling: 'center'
-};
-
 export default (props) => (
-  <div style={styles}>
+  <div
+    style={props.style}
+    className={`
+      container my-4
+      ${props.alignCenter ? 'align-items-center ' : ''}
+      ${props.flex ? 'd-flex ' : ''}
+    `}
+  >
     {props.children}
   </div>
 );

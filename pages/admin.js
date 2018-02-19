@@ -1,43 +1,36 @@
 import { Component } from 'react';
+import { createStore, combineReducers } from "redux";
+import withRedux from "next-redux-wrapper";
+import { reducer as formReducer } from 'redux-form'
+
 import Container from '../components/Container';
+import LoginForm from '../components/LoginForm';
 
-const inputStyles = {
-  padding: '10px',
-  marginBottom: '10px',
-  fontSize: '16px',
-  display: 'block',
-  border: '1px solid #ccc'
-};
+import reducer from "../reducers/admin";
 
-const buttonStyles = {
-  border: 'none',
-  display: 'inline-block',
-  padding: '8px 16px',
-  verticalAlign: 'middle',
-  overflow: 'hidden',
-  textDecoration: 'none',
-  textAlign: 'center',
-  cursor: 'pointer',
-  whiteSpace: 'nowrap',
-}
+const makeStore = (initialState, options) =>
+  createStore(combineReducers({ reducer, form: formReducer }), initialState);
 
-class Admin extends Component {
+class AdminLogin extends Component {
+  onFormSubmit = (value) => {
+
+    console.log(value);
+    // this.props.dispatch({})
+  };
+
   render() {
+    console.log('this.props', this.props);
     return (
-      <Container>
-        <div>
-          <h1>Admin Page</h1>
-          <form>
-            <label>Name</label>
-            <input type="text" style={inputStyles} />
-            <label>Password</label>
-            <input type="password" style={inputStyles} />
-            <button style={buttonStyles}>Submit</button>
-          </form>
+      <Container alignCenter flex style={{ minHeight: '500px' }}>
+        <div className="w-50 mx-auto d-flex flex-column">
+          <h1 className="text-info">Admin Page</h1>
+          <LoginForm onSubmit={this.onFormSubmit}/>
         </div>
       </Container>
     );
   }
-};
+}
+
+const Admin = withRedux(makeStore, (state) => ({}))(AdminLogin);
 
 export default Admin;
