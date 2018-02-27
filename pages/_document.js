@@ -32,6 +32,7 @@ export default class CustomDocument extends Document {
           {this.props.children}
           <Main />
           <NextScript />
+          <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=String.prototype.startsWith,Array.from,Array.prototype.fill,Array.prototype.keys,Array.prototype.findIndex,Number.isInteger&flags=gated" />
         </body>
       </html>
     )

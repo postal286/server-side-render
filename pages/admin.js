@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { createStore, combineReducers, bindActionCreators, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { withRouter } from 'next/router';
 import withRedux from 'next-redux-wrapper';
 import { reducer as formReducer } from 'redux-form';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -24,7 +25,11 @@ const makeStore = (initialState, options) =>
 class AdminLogin extends Component {
   onFormSubmit = (credentials) => this.props.loginAdmin(credentials)
     .then((res) => {
-      console.log(res);
+      if (res.data.fullName && res.data.role === 'admin') {
+        this.props.router.push('/admin-panel');
+      } else {
+        this.props.router.push('/');
+      }
     })
     .catch((err) => console.log(err));
 
@@ -48,6 +53,5 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   loginAdmin,
 }, dispatch);
 
-const Admin = withRedux(makeStore, mapStateToProps, mapDispatchToProps)(AdminLogin);
+export default withRouter(withRedux(makeStore, mapStateToProps, mapDispatchToProps)(AdminLogin));
 
-export default Admin;

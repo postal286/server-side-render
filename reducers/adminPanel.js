@@ -8,18 +8,15 @@ const actionTypes = {
   FETCHING: 'FETCHING',
 };
 
-export const loginAdmin = (credentials) => (dispatch) => {
-  return api.loginAdmin({
-    email: credentials.email,
-    password: credentials.password,
-  });
+export const createPost = (data) => (dispatch) => {
+  return api.createPost({});
 };
 
 const ACTION_HANDLERS = {
   [actionTypes.FETCHING]: (state, action) => state,
 };
 
-export default function adminLogin(state = initialState, action) {
+export default function adminPanel(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
 
   return handler ? handler(state, action) : state;
