@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { createStore, combineReducers } from "redux";
 import withRedux from "next-redux-wrapper";
 import { reducer as formReducer } from 'redux-form'
