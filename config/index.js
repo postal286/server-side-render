@@ -10,6 +10,7 @@ module.exports = function (server, mongoose) {
 
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', function(){
+    require('../defaultAdminCredentials');
     console.log('db connected');
   });
 };

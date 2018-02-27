@@ -7,13 +7,14 @@ import InputBase from "./InputBase";
 class LoginForm extends React.PureComponent {
   render() {
     const { handleSubmit, submitting, error } = this.props;
+    console.log(submitting);
     return (
       <form onSubmit={handleSubmit} className="d-flex p-3 pt-4 flex-column text-secondary">
         <label className="text-muted">Name</label>
         <Field
           type="text"
-          name="name"
-          placeholder="Name"
+          name="email"
+          placeholder="Email"
           component={InputBase}
           className="mb-3 p-2 text-info w-100"
         />
@@ -35,7 +36,11 @@ class LoginForm extends React.PureComponent {
           disabled={submitting}
           onClick={this.onFormSubmit}
         >
-          Submit
+          {submitting ?
+            <i className="fa fa-spinner fa-spin" style={{ fontSize: '24px' }} />
+            :
+            'Submit'
+          }
         </button>
       </form>
     );

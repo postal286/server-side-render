@@ -1,9 +1,26 @@
-const initialState = {};
+import api from '../api';
 
-const FETCH_DATA = 'FETCH_DATA';
+const initialState = {
+  fetching: false,
+};
+
+const actionTypes = {
+  FETCHING: 'FETCHING',
+};
+
+export const loginAdmin = (credentials) => (dispatch) => {
+  dispatch({
+    type: actionTypes.FETCHING,
+    payload: true,
+  });
+  return api.loginAdmin({
+    email: credentials.email,
+    password: credentials.password,
+  });
+};
 
 const ACTION_HANDLERS = {
-  [FETCH_DATA]: (state, action) => state,
+  [actionTypes.FETCHING]: (state, action) => state,
 };
 
 export default function adminReducer(state = initialState, action) {

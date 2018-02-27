@@ -1,4 +1,4 @@
-export default (app) => {
+module.exports = function (app) {
 
   app.get('/login', function (req, res) {
     res.render('login');
@@ -13,11 +13,11 @@ export default (app) => {
     }).exec(function (err, user) {
 
       //In case no users are found
-      if (user == undefined) {
+      if (user === undefined) {
         res.send('You should register! Your name is not listed with us.')
       } else {
 
-        if (user.password == loginData.password) {
+        if (user.password === loginData.password) {
           //When passwords match up
           res.send('You are welcome!')
         } else {

@@ -11,7 +11,7 @@ const makeStore = (initialState, options) => createStore(reducer, initialState);
 
 const MainPage = (props) => (
   <Layout>
-    <h1>My Blog</h1>
+    <h1 className="py-3" style={{ fontSize: '65px' }}>My Blog</h1>
     {props.show.map(({show}, index) => (
       <li key={index}>
         <Link as={`/p/${show.id}`} href={`/post?id=${show.id}`}>
