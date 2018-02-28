@@ -24,10 +24,10 @@ exports.sign_in = function(req, res) {
   }, function(err, user) {
     if (err) throw err;
     if (!user) {
-      res.status(401).json({ message: 'Authentication failed. User not found.' });
+      res.status(401).json({ message: 'Invalid username. User doesn\'t exist. Please, enter correct name and try again.' });
     } else if (user) {
       if (!user.comparePassword(req.body.password)) {
-        res.status(401).json({ message: 'Authentication failed. Wrong password.' });
+        res.status(401).json({ message: 'Invalid password. Please, enter correct password and try again.' });
       } else {
         return res.json({
           token: jwt.sign({

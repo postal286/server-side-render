@@ -15,6 +15,8 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+const port = 3002;
+
 app.prepare()
   .then(() => {
     const server = express();
@@ -33,9 +35,9 @@ app.prepare()
       return handle(req, res);
     });
 
-    server.listen(3001, (err) => {
+    server.listen(port, (err) => {
       if (err) throw err;
-      console.log('> Server is running on http://localhost:3001');
+      console.log('> Server is running on http://localhost:' + port);
     });
   })
   .catch((ex) => {

@@ -7,7 +7,6 @@ class InputBase extends Component {
       id,
       type,
       noError,
-      indentTop,
       className,
       placeholder,
       input: { onChange, name, value },
@@ -30,9 +29,7 @@ class InputBase extends Component {
           placeholder={placeholder}
         />
         {touched && error && !noError &&
-        <Div error indentTopTinySecondary indentTop={indentTop}>
-          {error}
-        </Div>
+          <div className="text-danger font-weight-light mb-3">{error}</div>
         }
       </div>
     );

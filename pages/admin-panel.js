@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { createStore, combineReducers, bindActionCreators, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import RichTextEditor from 'react-rte';
 import withRedux from 'next-redux-wrapper';
 import { reducer as formReducer } from 'redux-form';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import Container from '../components/Container';
+import CreatePostForm from '../components/CreatePostForm';
 
 import reducer from '../reducers/adminPanel';
 
@@ -24,41 +24,36 @@ const makeStore = (initialState, options) =>
 class AdminPanel extends Component {
   state = {
     createPost: false,
-    value: RichTextEditor.createEmptyValue()
   };
 
-  handleChange(value) {
-    this.setState({ text: value });
-  }
-
-  openEditor = () => {
+  toggleEditor = () => {
     this.setState({
-      createPost: true,
+      createPost: !this.state.createPost,
     });
   };
 
-  onChange = (value) => {
-    this.setState({value});
+  onCreatePostSubmit = (value) => {
+    console.log('value', value);
   };
-
-  onFormSubmit = (credentials) => this.props.loginAdmin(credentials)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => console.log(err));
 
   render() {
     return (
-      <Container alignCenter flex>
-        <div className="mx-auto d-flex flex-column">
-          <h1 className="text-info">Welcome to Admin Panel</h1>
-          <button onClick={() => this.openEditor()}>Create New Post</button>
-          {this.state.createPost &&
-            <RichTextEditor
-              value={this.state.value}
-              onChange={this.onChange}
-            />
-          }
+      <Container alignCenter>
+        <div className="d-flex flex-column">
+          <h1 className="text-success mb-4">Welcome to Admin Panel</h1>
+        </div>
+        <div>
+          <div className="mb-3">
+            To create a new post click "Create Post" button.
+          </div>
+          <button
+            type="button"
+            className={`btn btn-${this.state.createPost ? 'danger' : 'success'} mb-4 d-block`}
+            onClick={() => this.toggleEditor()}
+          >
+            {this.state.createPost ? 'Cancel Creation' : 'Create New Post'}
+          </button>
+          {this.state.createPost && <CreatePostForm onSubmit={this.onCreatePostSubmit}/>}
         </div>
       </Container>
     );

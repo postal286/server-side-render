@@ -4,13 +4,25 @@ import { Field, reduxForm } from 'redux-form';
 
 import InputBase from "./InputBase";
 
+const validate = (values) => {
+  const errors = {};
+  if (!values.email) {
+    errors.email = 'Email required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address';
+  }
+  if (!values.password) {
+    errors.password = 'Password required';
+  }
+  return errors;
+};
+
 class LoginForm extends React.PureComponent {
   render() {
     const { handleSubmit, submitting, error } = this.props;
-    console.log(submitting);
     return (
       <form onSubmit={handleSubmit} className="d-flex p-3 pt-4 flex-column text-secondary">
-        <label className="text-muted">Name</label>
+        <label className="text-muted">Email</label>
         <Field
           type="text"
           name="email"
@@ -27,12 +39,10 @@ class LoginForm extends React.PureComponent {
           className="mb-3 p-2 text-info w-100"
         />
         {error &&
-          <div className="my-3">
-            {error}
-          </div>
+          <div className="text-danger font-weight-light mb-3">{error}</div>
         }
         <button
-          className="btn btn-outline-info p-2 mt-4"
+          className="btn btn-outline-info p-2"
           disabled={submitting}
           onClick={this.onFormSubmit}
         >
@@ -50,9 +60,10 @@ class LoginForm extends React.PureComponent {
 LoginForm.propTypes = {
   handleSubmit: propTypes.func.isRequired,
   submitting: propTypes.bool.isRequired,
-  error: propTypes.object,
+  error: propTypes.string,
 };
 
 export default reduxForm({
   form: 'login',
+  validate,
 })(LoginForm);

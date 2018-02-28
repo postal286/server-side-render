@@ -3,7 +3,7 @@ import { createStore, combineReducers, bindActionCreators, applyMiddleware } fro
 import thunk from 'redux-thunk';
 import { withRouter } from 'next/router';
 import withRedux from 'next-redux-wrapper';
-import { reducer as formReducer } from 'redux-form';
+import { reducer as formReducer, SubmissionError } from 'redux-form';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import Container from '../components/Container';
@@ -13,7 +13,7 @@ import reducer from '../reducers/admin';
 
 import { loginAdmin } from '../reducers/admin'
 
-const makeStore = (initialState, options) =>
+const makeStore = (initialState) =>
   createStore(combineReducers({
     reducer,
     form: formReducer,
@@ -31,7 +31,9 @@ class AdminLogin extends Component {
         this.props.router.push('/');
       }
     })
-    .catch((err) => console.log(err));
+    .catch((error) => {
+      throw new SubmissionError({ _error: error.response.data.message });
+    });
 
   render() {
     return (
