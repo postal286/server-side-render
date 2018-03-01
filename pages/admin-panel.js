@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import withRedux from 'next-redux-wrapper';
 import { reducer as formReducer } from 'redux-form';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { Button } from 'reactstrap';
 
 import Container from '../components/Container';
 import CreatePostForm from '../components/CreatePostForm';
@@ -46,14 +47,18 @@ class AdminPanel extends Component {
           <div className="mb-3">
             To create a new post click "Create Post" button.
           </div>
-          <button
+          <Button
             type="button"
             className={`btn btn-${this.state.createPost ? 'danger' : 'success'} mb-4 d-block`}
             onClick={() => this.toggleEditor()}
           >
             {this.state.createPost ? 'Cancel Creation' : 'Create New Post'}
-          </button>
-          {this.state.createPost && <CreatePostForm onSubmit={this.onCreatePostSubmit}/>}
+          </Button>
+          {this.state.createPost &&
+            <CreatePostForm
+              onSubmit={this.onCreatePostSubmit}
+            />
+          }
         </div>
       </Container>
     );

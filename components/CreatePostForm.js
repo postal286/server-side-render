@@ -1,7 +1,8 @@
-import React, {Component} from "react";
-import propTypes from "prop-types";
+import React, { Component } from "react";
 import { Field, reduxForm } from 'redux-form';
 import EditorWrapper from '../components/EditorWrapper';
+import DateWrapper from '../components/DateWrapper';
+import propTypes from 'prop-types';
 
 class CreatePostForm extends Component {
   render() {
@@ -15,13 +16,15 @@ class CreatePostForm extends Component {
         </div>
         <div>
           Select the Date
+          <Field
+            name="date"
+            component={DateWrapper}
+          />
         </div>
       </form>
     );
   }
 }
-
-CreatePostForm.propTypes = {};
 
 export default reduxForm({
   form: 'create-post-form',
