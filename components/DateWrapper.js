@@ -18,7 +18,13 @@ class DateWrapper extends React.Component {
     onChange(formatedDate);
   };
 
-  onCheckboxChange = () => this.setState({ customDate: !this.state.customDate });
+  onCheckboxChange = () => {
+    this.setState({ customDate: !this.state.customDate }, () => {
+      if (!this.state.customDate) {
+        this.handleChange(moment());
+      }
+    });
+  };
 
   render() {
     return (

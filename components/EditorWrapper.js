@@ -42,6 +42,7 @@ class EditorWrapper extends Component {
   };
 
   render() {
+    const { meta: { touched, error } } = this.props;
     return (
       <div>
         <div className="mb-4">
@@ -51,6 +52,9 @@ class EditorWrapper extends Component {
             onEditorStateChange={this.handleEditorStateChange}
           />
         </div>
+        {touched && error &&
+          <div className="text-danger font-weight-light mb-3">{error}</div>
+        }
         <div className="mb-4">
           To Show Post Preview click "Show Preview".
         </div>

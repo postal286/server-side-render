@@ -18,7 +18,6 @@ class InputBase extends Component {
         touched,
       },
     } = this.props;
-    const isValue = type !== 'file' ? value : undefined;
     const styled = style ? { ...style } : {};
     const text = checkboxLabel ? checkboxLabel: '';
     return (
@@ -27,8 +26,8 @@ class InputBase extends Component {
           id={id}
           type={type}
           name={name}
+          value={value}
           style={styled}
-          value={isValue}
           title={placeholder}
           onChange={onChange}
           className={className}
@@ -36,7 +35,7 @@ class InputBase extends Component {
         />
         {text && text}
         {touched && error && !noError &&
-          <div className="text-danger font-weight-light mb-3">{error}</div>
+        <div className="text-danger font-weight-light mb-3">{error}</div>
         }
       </div>
     );

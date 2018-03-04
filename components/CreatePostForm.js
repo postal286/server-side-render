@@ -2,18 +2,35 @@ import React, { Component } from "react";
 import { Field, reduxForm } from 'redux-form';
 import ReactTooltip from 'react-tooltip';
 import { Button } from 'reactstrap';
+import moment from 'moment';
 
 import EditorWrapper from './EditorWrapper';
 import DateWrapper from './DateWrapper';
 import InputBase from './InputBase';
 import propTypes from 'prop-types';
 
+const isEditorEmpty = (values) => {
+  if (values.editor) {
+    const arrayOfStrings = JSON.parse(values.editor).blocks;
+    for (let i = 0; i < arrayOfStrings.length; i += 1) {
+      if (arrayOfStrings[i].text) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  console.log(values);
+};
+
 const validate = (values) => {
   const errors = {};
   if (!values.title) {
     errors.title = 'Title Required';
   }
-
+  if (isEditorEmpty(values)) {
+    errors.editor = 'Post Content Required';
+  }
   return errors;
 };
 
@@ -34,6 +51,7 @@ class CreatePostForm extends Component {
               <Field
                 type="text"
                 name="title"
+                defaultValue="Admin"
                 placeholder="Post Title..."
                 component={InputBase}
                 className="mb-3 p-2"
@@ -120,4 +138,9 @@ class CreatePostForm extends Component {
 export default reduxForm({
   form: 'create-post-form',
   validate,
+  initialValues: {
+    author: 'Admin',
+    date: moment().format(),
+    publish: false,
+  },
 })(CreatePostForm);
