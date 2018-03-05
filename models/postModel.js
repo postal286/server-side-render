@@ -5,11 +5,12 @@ const Schema = mongoose.Schema;
 const postSchema = new Schema({
   title: String,
   body: String,
+  description: String,
   author: String,
   comments: [{ body: String, date: Date }],
-  created_at: { type: Date, default: Date.now },
+  created_at: Date,
   updated_at: Date,
-  hidden: Boolean,
+  publish: Boolean,
 });
 
 const Post = mongoose.model('Post', postSchema);

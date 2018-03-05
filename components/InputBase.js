@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input } from 'reactstrap';
+import { Input, Label } from 'reactstrap';
 import propTypes from 'prop-types';
 
 class InputBase extends Component {
@@ -33,7 +33,7 @@ class InputBase extends Component {
           className={className}
           placeholder={placeholder}
         />
-        {text && text}
+        {text && <Label htmlFor={id}>{text}</Label>}
         {touched && error && !noError &&
         <div className="text-danger font-weight-light mb-3">{error}</div>
         }

@@ -13,7 +13,9 @@
     "draftjs-to-html": "^0.8.3",
     "eslint": "^4.18.1",
     "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
     "express": "^4.16.2",
+    "formidable": "^1.1.1",
     "immutable": "^3.8.2",
     "isomorphic-unfetch": "^2.0.0",
     "jsonwebtoken": "^8.1.1",
@@ -25,6 +27,7 @@
     "react-datepicker": "^1.2.1",
     "react-dom": "^16.2.0",
     "react-draft-wysiwyg": "^1.12.10",
+    "react-dropzone": "^4.2.8",
     "react-html-parser": "^2.0.2",
     "react-redux": "^5.0.7",
     "react-tooltip": "^3.4.0",
@@ -34,7 +37,8 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-form": "^7.2.3",
     "redux-thunk": "^2.2.0",
-    "styled-jsx": "^2.2.4"
+    "styled-jsx": "^2.2.4",
+    "toastr": "^2.1.4"
   },
   "scripts": {
     "dev": "node server.js",

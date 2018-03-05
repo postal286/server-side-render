@@ -1,8 +1,8 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import { Input } from 'reactstrap';
-
+import { Input, Label } from 'reactstrap';
+import propTypes from 'prop-types';
 
 class DateWrapper extends React.Component {
   state = {
@@ -27,14 +27,16 @@ class DateWrapper extends React.Component {
   };
 
   render() {
+    const { id } = this.props;
     return (
       <div>
         <div className="mb-3">
           <Input
+            id={id}
             type="checkbox"
             onChange={this.onCheckboxChange}
           />
-          {' Choose Custom Date (Default - Current Date)'}
+          <Label htmlFor={id}>{' Choose Custom Date (Default - Current Date)'}</Label>
         </div>
         <div className="mb-3">
           {this.state.customDate &&
@@ -48,6 +50,10 @@ class DateWrapper extends React.Component {
     );
   }
 }
+
+DateWrapper.propTypes = {
+  id: propTypes.string,
+};
 
 export default DateWrapper;
 

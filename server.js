@@ -6,9 +6,10 @@ const bodyParser = require('body-parser');
 const config = require('./config');
 
 const User = require('./models/userModel');
-const Post = require('./models/postModel');
 
 const post = require('./routes/post');
+const posts = require('./routes/posts');
+const api = require('./routes/api');
 const admin = require('./routes/admin');
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -30,6 +31,8 @@ app.prepare()
 
     admin(server, app);
     post(server, app);
+    posts(server, app);
+    api(server);
 
     server.get('*', (req, res) => {
       return handle(req, res);

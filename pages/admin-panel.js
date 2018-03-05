@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { createStore, combineReducers, bindActionCreators, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import toastr from 'toastr';
 import withRedux from 'next-redux-wrapper';
 import { reducer as formReducer } from 'redux-form';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -11,7 +12,7 @@ import CreatePostForm from '../components/CreatePostForm';
 
 import reducer from '../reducers/adminPanel';
 
-import { loginAdmin } from '../reducers/admin'
+import { createPost } from '../reducers/adminPanel';
 
 const makeStore = (initialState, options) =>
   createStore(combineReducers({
@@ -33,8 +34,18 @@ class AdminPanel extends Component {
     });
   };
 
-  onCreatePostSubmit = (value) => {
-    console.log('value', value);
+  onCreatePostSubmit = (values) => {
+    this.props.createPost(values)
+      .then((res) => {
+        this.setState({
+          createPost: !this.state.createPost,
+        }, () => {
+          toastr.success(res.data.message);
+        });
+      })
+      .catch((err) => {
+        toastr.error(err);
+      });
   };
 
   render() {
@@ -70,7 +81,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  loginAdmin,
+  createPost,
 }, dispatch);
 
 export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(AdminPanel);

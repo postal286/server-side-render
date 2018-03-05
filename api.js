@@ -1,8 +1,11 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3002'; // set default url
+export const baseURL = 'http://localhost:3002';
+
+axios.defaults.baseURL = baseURL; // default url
 
 export default class api {
-  static loginAdmin = (credentials) => axios.post('/admin', credentials);
-  static createPost = (data) => axios.post('/create-post', data);
+  static loginAdmin = (credentials) => axios.post('/api/admin', credentials);
+  static createPost = (values) => axios.post('/api/posts', values);
+  static getPosts = () => axios.get('/api/posts');
 };

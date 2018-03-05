@@ -1,4 +1,5 @@
 import api from '../api';
+import { reset } from 'redux-form';
 
 const initialState = {
   fetching: false,
@@ -8,9 +9,7 @@ const actionTypes = {
   FETCHING: 'FETCHING',
 };
 
-export const createPost = (data) => (dispatch) => {
-  return api.createPost({});
-};
+export const createPost = (values) => (dispatch) => api.createPost({ values });
 
 const ACTION_HANDLERS = {
   [actionTypes.FETCHING]: (state, action) => state,

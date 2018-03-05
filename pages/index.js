@@ -5,7 +5,7 @@ import { createStore } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import reducer from '../reducers/index';
 
-import Layout from '../components/MyLayout.js';
+import Layout from '../components/Layout.js';
 
 const makeStore = (initialState, options) => createStore(reducer, initialState);
 

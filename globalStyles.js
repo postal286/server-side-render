@@ -7,6 +7,10 @@ export default `
     border:1px solid #ccc !important;
   }
   
+  label[for]:hover {
+    cursor: pointer
+  }
+  
   input::-webkit-input-placeholder       {opacity: 1; font-weight: 400; color: #667784; font-size: 16px; line-height: 1.13; transition: all 0.4s ease;}
   input::-moz-placeholder                {opacity: 1; font-weight: 400; color: #667784; font-size: 16px; transition: all 0.4s ease;}
   input:-moz-placeholder                 {opacity: 1; font-weight: 400; color: #667784; font-size: 16px; transition: all 0.4s ease;}

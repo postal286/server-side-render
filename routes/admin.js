@@ -1,4 +1,3 @@
-const userController = require('../controllers/userController');
 
 module.exports = function (server, app) {
 
@@ -6,5 +5,4 @@ module.exports = function (server, app) {
     app.render(req, res, '/admin');
   });
 
-  server.post('/admin', userController.sign_in);
 };
