@@ -1,4 +1,3 @@
-const formidable = require('formidable');
 const Post = require('../models/postModel');
 const userController = require('../controllers/userController');
 
