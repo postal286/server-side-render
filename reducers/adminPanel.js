@@ -1,5 +1,4 @@
 import api from '../api';
-import { reset } from 'redux-form';
 
 const initialState = {
   fetching: false,
@@ -9,7 +8,13 @@ const actionTypes = {
   FETCHING: 'FETCHING',
 };
 
-export const createPost = (values) => (dispatch) => api.createPost({ values });
+export const createPost = (values) => (dispatch) => api.saveImage(values.imageDropzone)
+  .then((res) => {
+    console.log('res', res);
+    // const { image } = res.data;
+    // const { imageDropzone, ...rest } = values;
+    // return api.createPost({ ...rest, image });
+  });
 
 const ACTION_HANDLERS = {
   [actionTypes.FETCHING]: (state, action) => state,

@@ -1,4 +1,5 @@
 const express = require('express');
+const formidable = require('express-formidable');
 const next = require('next');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -22,6 +23,10 @@ app.prepare()
   .then(() => {
     const server = express();
     server.use(bodyParser.json());
+    server.use(formidable({
+      uploadDir: '/uploads',
+      multiples: false,
+    }));
 
     // config
 

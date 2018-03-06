@@ -40,10 +40,10 @@ class DateWrapper extends React.Component {
         </div>
         <div className="mb-3">
           {this.state.customDate &&
-            <DatePicker
-              selected={this.state.startDate}
-              onChange={this.handleChange}
-            />
+          <DatePicker
+            selected={this.state.startDate}
+            onChange={this.handleChange}
+          />
           }
         </div>
       </div>
@@ -56,4 +56,3 @@ DateWrapper.propTypes = {
 };
 
 export default DateWrapper;
-

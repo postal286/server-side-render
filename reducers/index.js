@@ -1,5 +1,5 @@
 const initialState = {
-  user: 'Vocuba',
+  user: 'Value',
 };
 
 const FETCH_DATA = 'FETCH_DATA';

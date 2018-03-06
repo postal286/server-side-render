@@ -53,7 +53,7 @@ class EditorWrapper extends Component {
           />
         </div>
         {touched && error &&
-          <div className="text-danger font-weight-light mb-3">{error}</div>
+        <div className="text-danger font-weight-light mb-3">{error}</div>
         }
         <div className="mb-4">
           To Show Post Preview click "Show Preview".
@@ -66,9 +66,9 @@ class EditorWrapper extends Component {
           {this.state.preview ? 'Hide Preview' : 'Show Preview'}
         </Button>
         {this.state.preview &&
-          <div>
-            {ReactHtmlParser(this.state.string)}
-          </div>
+        <div>
+          {ReactHtmlParser(this.state.string)}
+        </div>
         }
       </div>
     );

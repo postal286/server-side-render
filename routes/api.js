@@ -1,5 +1,4 @@
 const formidable = require('formidable');
-
 const Post = require('../models/postModel');
 const userController = require('../controllers/userController');
 
@@ -12,7 +11,7 @@ module.exports = function (server) {
       .limit(5)
       .exec(function (err, posts) {
         res.status(200).json({ posts });
-    });
+      });
   });
 
   server.post('/api/posts', function (req, res) {
@@ -33,19 +32,7 @@ module.exports = function (server) {
   server.post('/api/admin', userController.sign_in);
 
   server.post('/api/uploads', function (req, res){
-    const form = new formidable.IncomingForm();
-
-    form.parse(req);
-
-    form.on('fileBegin', function (name, file){
-      file.path = __dirname + '/uploads/' + file.name;
-    });
-
-    form.on('file', function (name, file){
-      console.log('Uploaded ' + file.name);
-    });
-
-    res.sendFile(__dirname + '/index.html');
+    console.log('res.file', res.file);
   });
 
 };

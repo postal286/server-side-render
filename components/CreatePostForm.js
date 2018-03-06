@@ -10,6 +10,8 @@ import DateWrapper from './DateWrapper';
 import InputBase from './InputBase';
 import DropzoneWrapper from "./DropzoneWrapper";
 
+const maxImageSize = 3000000;
+
 const isEditorEmpty = (values) => {
   if (values.body) {
     const arrayOfStrings = JSON.parse(values.body).blocks;
@@ -29,6 +31,19 @@ const validate = (values) => {
   }
   if (isEditorEmpty(values)) {
     errors.body = 'Post Content Required';
+  }
+  console.log('values', values);
+  if(values.imageDropzone && values.imageDropzone.size >= 3000000) {
+    errors.imageDropzone = `Max File Size - 3000000 bytes,
+    but ${values.imageDropzone.name} is ${values.imageDropzone.size} bytes.
+    Please, choose file that satisfies the conditions.`
+  }
+  if(values.imageDropzone &&
+    (values.imageDropzone.type.toLowerCase() !== 'image/png'
+      && values.imageDropzone.type.toLowerCase() !== 'image/jpg'
+      && values.imageDropzone.type.toLowerCase() !== 'image/jpeg')) {
+    errors.imageDropzone = `Alowed file extension is *.png or *.jpg,
+    but ${values.imageDropzone.name} has another. Please, choose file that satisfies the conditions.`
   }
   return errors;
 };
@@ -92,13 +107,16 @@ class CreatePostForm extends Component {
           />
         </div>
         <div className="mb-3">
-          <DropzoneWrapper
+          <Field
+            name="imageDropzone"
+            maxSize={maxImageSize}
             style={{
               textAlign: 'center',
               border: '1px dashed #333',
               padding: '15px',
               marginBottom: '1rem',
             }}
+            component={DropzoneWrapper}
           />
         </div>
         <div className="mb-3">

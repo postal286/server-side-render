@@ -36,16 +36,16 @@ class AdminPanel extends Component {
 
   onCreatePostSubmit = (values) => {
     this.props.createPost(values)
-      .then((res) => {
-        this.setState({
-          createPost: !this.state.createPost,
-        }, () => {
-          toastr.success(res.data.message);
-        });
-      })
-      .catch((err) => {
-        toastr.error(err);
-      });
+    // .then((res) => {
+    //   this.setState({
+    //     createPost: !this.state.createPost,
+    //   }, () => {
+    //     toastr.success(res.data.message);
+    //   });
+    // })
+    // .catch((err) => {
+    //   toastr.error(err);
+    // });
   };
 
   render() {
@@ -66,9 +66,9 @@ class AdminPanel extends Component {
             {this.state.createPost ? 'Cancel Creation' : 'Create New Post'}
           </Button>
           {this.state.createPost &&
-            <CreatePostForm
-              onSubmit={this.onCreatePostSubmit}
-            />
+          <CreatePostForm
+            onSubmit={this.onCreatePostSubmit}
+          />
           }
         </div>
       </Container>

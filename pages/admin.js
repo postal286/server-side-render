@@ -15,9 +15,9 @@ import { loginAdmin } from '../reducers/admin'
 
 const makeStore = (initialState) =>
   createStore(combineReducers({
-    reducer,
-    form: formReducer,
-  }),
+      reducer,
+      form: formReducer,
+    }),
     initialState,
     composeWithDevTools(applyMiddleware(thunk))
   );
