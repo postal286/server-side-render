@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createStore, combineReducers, bindActionCreators, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import toastr from 'toastr';
+import Link from 'next/link';
 import withRedux from 'next-redux-wrapper';
 import { reducer as formReducer } from 'redux-form';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -64,6 +65,16 @@ class AdminPanel extends Component {
             onClick={() => this.toggleEditor()}
           >
             {this.state.createPost ? 'Cancel Creation' : 'Create New Post'}
+          </Button>
+          <Button
+            type="button"
+            className="btn btn-success mb-4 d-block"
+          >
+            <Link href={`/posts`}>
+              <div style={{ color: 'white' }}>
+                See All Posts
+              </div>
+            </Link>
           </Button>
           {this.state.createPost &&
           <CreatePostForm

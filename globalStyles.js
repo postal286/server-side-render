@@ -1,4 +1,7 @@
 export default `
+  * {
+    box-sizing: border-box;
+  }
   input[type="text"],
   input[type="password"],
   textarea {

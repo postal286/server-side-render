@@ -27,15 +27,56 @@ const makeStore = (initialState) =>
 class Posts extends Component {
 
   renderPosts = (posts) => posts.map((post) => (
-    <article className="mb-4" key={post._id}>
-      <img src={`/static/uploads/${post.img}`} />
-      <Link href={`/post/${post._id}`}>
-        <h2 className="mb-2">{post.title}</h2>
-      </Link>
-      {post.description && <p>{post.description}</p>}
-      <div className="mb-2">{`Posted by: ${post.author}`}</div>
-      <p>{moment(post.created_at).format('LL')}</p>
+    <Link
+      key={post._id}
+      href={`/post/${post._id}`}
+    >
+      <article
+        title={`See "${post.title}" post detail`}
+        className="mb-4 mx-2 posts-page__posts-inner-wrapper"
+      >
+        <div
+          style={{
+            backgroundImage: `url(/static/uploads/${post.img})`,
+          }}
+          className="posts-page__post-container-with-image"
+        >
+          <footer className="posts-page__post-footer">
+            <h3 className="mb-2">{post.title}</h3>
+            {post.description && <p>{post.description}</p>}
+            <div className="mb-2">{`Posted by: ${post.author}`}</div>
+            <p>{moment(post.created_at).format('LL')}</p>
+          </footer>
+        </div>
+        <style jsx>{`
+          .posts-page__posts-inner-wrapper {
+            cursor: pointer;
+            transition: background-size .5s ease-in-out,  box-shadow .7s ease;
+          }
+          .posts-page__post-container-with-image {
+            width: 400px;
+            height: 300px;
+            background-size: 100%;
+            background-position: 50% 50%;
+            display: flex;
+            background-color: #a0a0a0;
+            transition: background-size .5s ease-in-out, box-shadow .7s ease;
+            flex-direction: column-reverse;
+          }
+          .posts-page__post-container-with-image:hover {
+            background-size: 105%;
+            box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.38)
+          }
+          .posts-page__post-footer {
+            padding: 15px;
+            background-color: rgba(0,0,0,.5);
+            color: white;
+          }
+        `}
+        </style>
     </article>
+    </Link>
+
   ));
 
   render() {
@@ -43,14 +84,23 @@ class Posts extends Component {
     return (
       <div>
         <div>
-          <div>
-            <h1>
+          <div className="posts-page__wrapper">
+            <h1 className="posts-page__title">
               Crazy Next.js Super Fresh Blog
             </h1>
           </div>
         </div>
+        <Layout>
+          <div className="posts-page__posts-wrapper">
+            {posts.length > 0 ?
+              this.renderPosts(posts)
+                :
+              'There\'s no posts yet'
+            }
+          </div>
+        </Layout>
         <style jsx>{`
-          div > div {
+          .posts-page__wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -62,20 +112,16 @@ class Posts extends Component {
             background-size: cover;
             background-position: 50% 50%;
           }
-          div > div > h1 {
+          .posts-page__title {
             font-size: 50px;
             color: white;
             text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
           }
+          .posts-page__posts-wrapper {
+            display: flex;
+          }
         `}
         </style>
-        <Layout>
-          {posts.length > 0 ?
-            this.renderPosts(posts)
-              :
-            'There\'s no posts yet'
-          }
-        </Layout>
       </div>
     );
   }

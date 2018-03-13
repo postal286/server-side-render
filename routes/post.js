@@ -1,8 +1,8 @@
 module.exports = function(server, app) {
 
-  server.get('/p/:id', (req, res) => {
+  server.get('/post/:id', (req, res) => {
     const actualPage = '/post';
-    const queryParams = {id: req.params.id};
+    const queryParams = { id: req.params.id };
     app.render(req, res, actualPage, queryParams);
   });
 
