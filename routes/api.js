@@ -19,9 +19,8 @@ module.exports = function (server) {
   });
 
   server.post('/api/posts', function (req, res) {
-    console.log('req.body.values', req.body.values);
     const post = new Post({
-      ...req.body.values,
+      ...req.body,
     });
     post.save(function(err) {
       if (err) {

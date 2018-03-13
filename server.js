@@ -22,6 +22,7 @@ app.prepare()
   .then(() => {
     const server = express();
     server.use(bodyParser.json());
+    server.use(express.static('uploads'));
 
     // config
 

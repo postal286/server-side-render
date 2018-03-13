@@ -85,7 +85,6 @@ class Posts extends Component {
 Posts.getInitialProps = async function () {
   const res = await fetch(`${baseURL}/api/posts`);
   const posts = await res.json();
-  console.log('posts', posts);
   return { ...posts };
 };
 
