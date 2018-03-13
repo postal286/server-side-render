@@ -11,6 +11,7 @@ const postSchema = new Schema({
   created_at: Date,
   updated_at: Date,
   publish: Boolean,
+  img: String,
 });
 
 const Post = mongoose.model('Post', postSchema);

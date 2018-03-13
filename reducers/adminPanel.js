@@ -8,13 +8,13 @@ const actionTypes = {
   FETCHING: 'FETCHING',
 };
 
-export const createPost = (values) => (dispatch) => api.saveImage(values.imageDropzone)
-  .then((res) => {
-    console.log('res', res);
-    // const { image } = res.data;
-    // const { imageDropzone, ...rest } = values;
-    // return api.createPost({ ...rest, image });
-  });
+export const createPost = (values) => (dispatch) =>
+  api.saveImage(values.imageDropzone)
+    .then((res) => {
+      const { img } = res.data;
+      const { imageDropzone, ...rest } = values;
+      return api.createPost({ ...rest, img });
+    });
 
 const ACTION_HANDLERS = {
   [actionTypes.FETCHING]: (state, action) => state,

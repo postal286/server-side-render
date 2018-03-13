@@ -28,13 +28,14 @@ class Posts extends Component {
 
   renderPosts = (posts) => posts.map((post) => (
     <article className="mb-4" key={post._id}>
+      {console.log('post', post)}
       <Link href={`/post/${post._id}`}>
         <h2>{post.title}</h2>
       </Link>
       <h5>{post.author}</h5>
       {post.description && <p>{post.description}</p>}
       <p>{moment(post.created_at).format('LL')}</p>
-      {/*<img src={props.show.image.medium} />*/}
+      <img src={`/uploads/${post.img}`} />
     </article>
   ));
 
@@ -56,6 +57,7 @@ class Posts extends Component {
             justify-content: center;
             height: 400px;
             width: 100%;
+            background-color: #a0a0a0;
             box-shadow: 0px 3px 10px 0px rgba(50, 50, 50, 0.5);
             background-image: url('/static/posts-title-bg.jpg');
             background-size: cover;
@@ -83,6 +85,7 @@ class Posts extends Component {
 Posts.getInitialProps = async function () {
   const res = await fetch(`${baseURL}/api/posts`);
   const posts = await res.json();
+  console.log('posts', posts);
   return { ...posts };
 };
 

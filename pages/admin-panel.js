@@ -36,16 +36,16 @@ class AdminPanel extends Component {
 
   onCreatePostSubmit = (values) => {
     this.props.createPost(values)
-    // .then((res) => {
-    //   this.setState({
-    //     createPost: !this.state.createPost,
-    //   }, () => {
-    //     toastr.success(res.data.message);
-    //   });
-    // })
-    // .catch((err) => {
-    //   toastr.error(err);
-    // });
+    .then((res) => {
+      this.setState({
+        createPost: !this.state.createPost,
+      }, () => {
+        toastr.success(res.data.message);
+      });
+    })
+    .catch((err) => {
+      toastr.error(err);
+    });
   };
 
   render() {

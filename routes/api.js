@@ -4,6 +4,7 @@ const Busboy = require('busboy');
 const fs = require('fs');
 const path = require('path');
 const uuidv1 = require('uuid/v1');
+const mimetypes = require('../common').mimetypes;
 
 module.exports = function (server) {
 
@@ -18,6 +19,7 @@ module.exports = function (server) {
   });
 
   server.post('/api/posts', function (req, res) {
+    console.log('req.body.values', req.body.values);
     const post = new Post({
       ...req.body.values,
     });
@@ -36,19 +38,27 @@ module.exports = function (server) {
 
   server.post('/api/uploads', function (req, res) {
     const busboy = new Busboy({ headers: req.headers });
-    const id = uuidv1();
-    let saveTo;
+    let fileName;
+
     busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-      console.log('file', file);
-      console.log('fieldname', fieldname);
-      console.log('filename', filename);
-      console.log('mimetype', mimetype);
-      saveTo = path.join(__dirname, '/../uploads/' + path.basename(id));
-      console.log('saveTo', id);
-      file.pipe(fs.createWriteStream(saveTo));
+
+      if (mimetypes.includes(mimetype.toLowerCase())) {
+        const id = uuidv1();
+        fileName = id + path.extname(filename);
+        const saveTo = path.join(__dirname, '/../uploads/' + path.basename(fileName));
+        file.pipe(fs.createWriteStream(saveTo));
+      } else {
+        const message = path.extname(filename).toUpperCase() + ' format is not alowed!';
+        res.status(400).end(JSON.stringify( { message: message } ));
+      }
+
     });
+
     busboy.on('finish', function() {
-      res.end(JSON.stringify({ filepath: id }));
+      res.end(JSON.stringify({
+        success: true,
+        img: fileName,
+      }));
     });
     return req.pipe(busboy);
   });
