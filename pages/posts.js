@@ -28,14 +28,13 @@ class Posts extends Component {
 
   renderPosts = (posts) => posts.map((post) => (
     <article className="mb-4" key={post._id}>
-      {console.log('post', post)}
+      <img src={`/static/uploads/${post.img}`} />
       <Link href={`/post/${post._id}`}>
-        <h2>{post.title}</h2>
+        <h2 className="mb-2">{post.title}</h2>
       </Link>
-      <h5>{post.author}</h5>
       {post.description && <p>{post.description}</p>}
+      <div className="mb-2">{`Posted by: ${post.author}`}</div>
       <p>{moment(post.created_at).format('LL')}</p>
-      <img src={`/uploads/${post.img}`} />
     </article>
   ));
 

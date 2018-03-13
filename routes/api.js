@@ -44,7 +44,7 @@ module.exports = function (server) {
       if (mimetypes.includes(mimetype.toLowerCase())) {
         const id = uuidv1();
         fileName = id + path.extname(filename);
-        const saveTo = path.join(__dirname, '/../uploads/' + path.basename(fileName));
+        const saveTo = path.join(__dirname, '/../static/uploads/' + path.basename(fileName));
         file.pipe(fs.createWriteStream(saveTo));
       } else {
         const message = path.extname(filename).toUpperCase() + ' format is not alowed!';
