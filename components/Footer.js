@@ -13,7 +13,7 @@ const renderFooterLinksArray = () => {
   for (let i = 0; i < linksLabels.length; i++) {
     links.push(
       <li className="footer__link-wrapper" key={i}>
-        <Link href={footerLinks[linksLabels[i]]}>
+        <Link prefetch href={footerLinks[linksLabels[i]]}>
           <a className="footer__link">
             {linksLabels[i]}
           </a>

@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const uuidv1 = require('uuid/v1');
 const mimetypes = require('../common').mimetypes;
+const Includes = require('lodash').includes;
 
 module.exports = function (server) {
 
@@ -51,7 +52,7 @@ module.exports = function (server) {
 
     busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
 
-      if (mimetypes.includes(mimetype.toLowerCase())) {
+      if (Includes(mimetypes, mimetype.toLowerCase())) {
         const id = uuidv1();
         fileName = id + path.extname(filename);
         const saveTo = path.join(__dirname, '/../static/uploads/' + path.basename(fileName));

@@ -10,4 +10,4 @@ const spliceText = (text, from, to) => {
 };
 
 module.exports.mimetypes = mimetypes;
-module.exports.mimetypes = spliceText;
+module.exports.spliceText = spliceText;

@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
+import fetch from 'isomorphic-unfetch';
+import Link from 'next/link';
 import propTypes from 'prop-types';
 import moment from 'moment';
-import Link from 'next/link';
 
-import Layout from '../components/Layout.js';
-
-import { createStore, combineReducers, bindActionCreators, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import withRedux from 'next-redux-wrapper';
+import { createStore, combineReducers, bindActionCreators, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
+import Layout from '../components/Layout.js';
 import posts from '../reducers/posts';
 
+import { baseURL } from '../api';
 import { getPosts } from '../reducers/posts';
-import fetch from "isomorphic-unfetch";
-import { baseURL } from "../api";
+import { spliceText } from '../common';
 
 const makeStore = (initialState) =>
   createStore(combineReducers({
@@ -36,61 +36,76 @@ class Posts extends Component {
         className="mb-4 posts-page__posts-inner-wrapper"
       >
         <div
-          style={{ backgroundImage: `url(/static/uploads/${post.img})` }}
+          style={post.img && { backgroundImage: `url(/static/uploads/${post.img})` }}
           className="posts-page__post-container-with-image"
         >
           <footer className="posts-page__post-footer">
-            <h3 className="mb-2">{post.title}</h3>
-            {post.description && <p>{post.description}</p>}
-            <div className="mb-2">{`Posted by: ${post.author}`}</div>
-            <p>{moment(post.created_at).format('LL')}</p>
+            <h3 className="mb-2">{spliceText(post.title, 0, 40)}</h3>
+            {post.description && <p>{spliceText(post.description, 0, 70)}</p>}
+            <div className="posts-page__post-footer-author-date">
+              <div className="mb-2">{`Author: ${spliceText(post.author, 0, 16)}`}</div>
+              <p>{moment(post.created_at).format('LL')}</p>
+            </div>
           </footer>
         </div>
         <style jsx>{`
-          .posts-page__posts-inner-wrapper {
-            cursor: pointer;
-            transition: background-size .5s ease-in-out,
-                        box-shadow .7s ease,
-                        color .5s ease,
-                        background-color .3s ease;
-          }
-          .posts-page__post-container-with-image {
-            width: 360px;
-            height: 300px;
-            box-shadow: 0px 0px 10px -1px rgba(0,0,0,0.69);
-            background-size: 150%;
-            background-position: 50% 50%;
-            display: flex;
-            background-color: #a0a0a0;
-            transition: background-size .5s ease-in-out,
-                        box-shadow .7s ease,
-                        color .5s ease,
-                        background-color .3s ease;
-            flex-direction: column-reverse;
-          }
-          .posts-page__post-container-with-image:hover {
-            background-size: 160%;
-            box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.38)
-          }
-          .posts-page__post-footer {
-            padding: 15px;
-            transition: background-color .3s ease,
-                        color .5s ease;
-            background-color: rgba(0,0,0,.5);
-            color: #fefefe;
-          }
-          .posts-page__post-container-with-image:hover .posts-page__post-footer {
-            background-color: rgba(255, 205, 33, 0.9);
-            color: #333;
-          }
-        `}
+            .posts-page__posts-inner-wrapper {
+              cursor: pointer;
+              transition: background-size .5s ease-in-out,
+                          box-shadow .7s ease,
+                          color .5s ease,
+                          background-color .3s ease;
+            }
+            .posts-page__post-container-with-image {
+              width: 360px;
+              height: 300px;
+              box-shadow: 0px 0px 10px -1px rgba(0,0,0,0.69);
+              background-size: 150%;
+              background-position: 50% 50%;
+              display: flex;
+              background-color: #a0a0a0;
+              transition: background-size .5s ease-in-out,
+                          box-shadow .7s ease,
+                          color .5s ease,
+                          background-color .3s ease;
+              flex-direction: column-reverse;
+            }
+            .posts-page__post-container-with-image:hover {
+              background-size: 160%;
+              box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.38)
+            }
+            .posts-page__post-footer {
+              padding: 15px;
+              transition: background-color .3s ease,
+                          color .5s ease;
+              background-color: rgba(0,0,0,.5);
+              color: #fefefe;
+            }
+            .posts-page__post-container-with-image:hover .posts-page__post-footer {
+              background-color: rgba(255, 205, 33, 0.9);
+              color: #333;
+            }
+            .posts-page__post-footer-author-date {
+              display: flex;
+              justify-content: space-between;
+            }
+          `}
         </style>
-    </article>
+      </article>
     </Link>
   ));
 
+  justifyPosts = (length) => {
+    switch (length) {
+      case 1 : return 'flex-start';
+      case 2 : return 'space-around';
+      default: return 'space-between';
+    }
+  };
+
   render() {
     const { posts } = this.props;
+    const justify = this.justifyPosts(posts.length);
     return (
       <div>
         <div>
@@ -107,7 +122,7 @@ class Posts extends Component {
           <div className="posts-page__posts-wrapper">
             {posts.length > 0 ?
               this.renderPosts(posts)
-                :
+              :
               'There\'s no posts yet'
             }
           </div>
@@ -148,7 +163,7 @@ class Posts extends Component {
           .posts-page__posts-wrapper {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: ${justify};
           }
         `}
         </style>
