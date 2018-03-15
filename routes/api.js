@@ -20,10 +20,11 @@ module.exports = function (server) {
 
   server.get('/api/post/:id', function (req, res) {
     Post
-      .find({ _id: req.params.id })
+      .findOne({ _id: req.params.id })
       .exec(function (err, post) {
-        console.log('post', post);
-        res.status(200).json({ post });
+        if (post) {
+          res.status(200).json(post);
+        }
       });
   });
 

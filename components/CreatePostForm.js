@@ -32,7 +32,6 @@ const validate = (values) => {
   if (isEditorEmpty(values)) {
     errors.body = 'Post Content Required';
   }
-  console.log('values', values);
   if(values.imageDropzone && values.imageDropzone.size >= 3000000) {
     errors.imageDropzone = `Max File Size - 3000000 bytes,
     but ${values.imageDropzone.name} is ${values.imageDropzone.size} bytes.

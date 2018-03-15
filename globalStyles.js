@@ -1,6 +1,19 @@
 export default `
-  * {
+  html {
+    height: 100%;
     box-sizing: border-box;
+  }
+  body {
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+  }
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
   }
   input[type="text"],
   input[type="password"],

@@ -11,7 +11,12 @@ const makeStore = (initialState, options) => createStore(reducer, initialState);
 
 const MainPage = (props) => (
   <Layout>
-    <h1 className="py-3" style={{ fontSize: '65px' }}>My Blog</h1>
+    <h1 className="my-3 main-page__title">
+      Welcome to Crazy Next.js<br />Super Fresh Blog
+    </h1>
+    <div>
+      If you are Admin, please, login in the <Link href="/admin">Admin Login Page</Link>
+    </div>
     {props.show.map(({show}, index) => (
       <li key={index}>
         <Link as={`/p/${show.id}`} href={`/post?id=${show.id}`}>
@@ -21,6 +26,12 @@ const MainPage = (props) => (
         </Link>
       </li>
     ))}
+    <style jsx>{`
+      .main-page__title {
+        font-size: 65px;
+        text-align: center;
+      }
+    `}</style>
   </Layout>
 );
 

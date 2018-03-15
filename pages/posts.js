@@ -33,12 +33,10 @@ class Posts extends Component {
     >
       <article
         title={`See "${post.title}" post detail`}
-        className="mb-4 mx-2 posts-page__posts-inner-wrapper"
+        className="mb-4 posts-page__posts-inner-wrapper"
       >
         <div
-          style={{
-            backgroundImage: `url(/static/uploads/${post.img})`,
-          }}
+          style={{ backgroundImage: `url(/static/uploads/${post.img})` }}
           className="posts-page__post-container-with-image"
         >
           <footer className="posts-page__post-footer">
@@ -51,32 +49,44 @@ class Posts extends Component {
         <style jsx>{`
           .posts-page__posts-inner-wrapper {
             cursor: pointer;
-            transition: background-size .5s ease-in-out,  box-shadow .7s ease;
+            transition: background-size .5s ease-in-out,
+                        box-shadow .7s ease,
+                        color .5s ease,
+                        background-color .3s ease;
           }
           .posts-page__post-container-with-image {
-            width: 400px;
+            width: 360px;
             height: 300px;
-            background-size: 100%;
+            box-shadow: 0px 0px 10px -1px rgba(0,0,0,0.69);
+            background-size: 150%;
             background-position: 50% 50%;
             display: flex;
             background-color: #a0a0a0;
-            transition: background-size .5s ease-in-out, box-shadow .7s ease;
+            transition: background-size .5s ease-in-out,
+                        box-shadow .7s ease,
+                        color .5s ease,
+                        background-color .3s ease;
             flex-direction: column-reverse;
           }
           .posts-page__post-container-with-image:hover {
-            background-size: 105%;
+            background-size: 160%;
             box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.38)
           }
           .posts-page__post-footer {
             padding: 15px;
+            transition: background-color .3s ease,
+                        color .5s ease;
             background-color: rgba(0,0,0,.5);
-            color: white;
+            color: #fefefe;
+          }
+          .posts-page__post-container-with-image:hover .posts-page__post-footer {
+            background-color: rgba(255, 205, 33, 0.9);
+            color: #333;
           }
         `}
         </style>
     </article>
     </Link>
-
   ));
 
   render() {
@@ -91,6 +101,9 @@ class Posts extends Component {
           </div>
         </div>
         <Layout>
+          <h1 className="posts-page__subtitle">
+            Recent Posts
+          </h1>
           <div className="posts-page__posts-wrapper">
             {posts.length > 0 ?
               this.renderPosts(posts)
@@ -106,6 +119,8 @@ class Posts extends Component {
             justify-content: center;
             height: 400px;
             width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
             background-color: #a0a0a0;
             box-shadow: 0px 3px 10px 0px rgba(50, 50, 50, 0.5);
             background-image: url('/static/posts-title-bg.jpg');
@@ -117,8 +132,23 @@ class Posts extends Component {
             color: white;
             text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
           }
+          .posts-page__subtitle {
+            margin: 50px 0;
+            position: relative;
+          }
+          .posts-page__subtitle:before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 100%;
+            position: absolute;
+            left: -15px;
+            background-color: #333;
+          }
           .posts-page__posts-wrapper {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
           }
         `}
         </style>
