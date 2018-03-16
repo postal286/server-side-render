@@ -17,7 +17,7 @@ User.find({ email: user.email }, function (err, docs) {
       console.log('Default admin was created.');
     });
   } else {
-    console.log('User ' + user.email + ' already exists.');
+    console.log('> User ' + user.email + ' already exists.');
   }
 });
 

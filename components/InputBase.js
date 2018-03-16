@@ -22,7 +22,7 @@ class InputBase extends Component {
     const text = checkboxLabel ? checkboxLabel: '';
     return (
       <div>
-        <input
+        <Input
           id={id}
           type={type}
           name={name}

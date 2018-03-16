@@ -101,7 +101,7 @@ class Posts extends Component {
         <div>
           <div className="posts-page__wrapper">
             <h1 className="posts-page__title">
-              Crazy Next.js Super Fresh Blog
+              Crazy <span style={{ color: '#FFCD21' }}>Next.js</span> Super Fresh Blog
             </h1>
           </div>
         </div>

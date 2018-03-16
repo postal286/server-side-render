@@ -11,6 +11,6 @@ export default combineReducers({
   adminPanel,
   indexReducer,
   postsReducer,
-  formReducer,
+  form: formReducer,
 })
 
