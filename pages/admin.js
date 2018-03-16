@@ -1,26 +1,14 @@
 import React, { Component } from 'react';
-import { createStore, combineReducers, bindActionCreators, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { bindActionCreators } from 'redux';
 import { withRouter } from 'next/router';
 import withRedux from 'next-redux-wrapper';
-import { reducer as formReducer, SubmissionError } from 'redux-form';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import initStore from '../store';
 
 import Container from '../components/Container';
 import LoginForm from '../components/LoginForm';
 
-import reducer from '../reducers/admin';
 
 import { loginAdmin } from '../reducers/admin'
-
-const makeStore = (initialState) =>
-  createStore(combineReducers({
-      reducer,
-      form: formReducer,
-    }),
-    initialState,
-    composeWithDevTools(applyMiddleware(thunk))
-  );
 
 class AdminLogin extends Component {
   onFormSubmit = (credentials) => this.props.loginAdmin(credentials)
@@ -55,5 +43,5 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   loginAdmin,
 }, dispatch);
 
-export default withRouter(withRedux(makeStore, mapStateToProps, mapDispatchToProps)(AdminLogin));
+export default withRouter(withRedux(initStore, mapStateToProps, mapDispatchToProps)(AdminLogin));
 

@@ -33,7 +33,7 @@ const ACTION_HANDLERS = {
   },
 };
 
-export default function posts(state = initialState, action) {
+export default function postsReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
 
   return handler ? handler(state, action) : state;

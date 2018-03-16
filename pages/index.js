@@ -1,13 +1,11 @@
 import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
 import React from 'react';
-import { createStore } from 'redux';
 import withRedux from 'next-redux-wrapper';
-import reducer from '../reducers/index';
+
+import initStore from '../store';
 
 import Layout from '../components/Layout.js';
-
-const makeStore = (initialState, options) => createStore(reducer, initialState);
 
 const MainPage = (props) => (
   <Layout>
@@ -44,6 +42,6 @@ MainPage.getInitialProps = async function() {
   };
 };
 
-const Index = withRedux(makeStore, (state) => ({ user: state.user }))(MainPage);
+const Index = withRedux(initStore, (state) => ({ user: state.user }))(MainPage);
 
 export default Index;

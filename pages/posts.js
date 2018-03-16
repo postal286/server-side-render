@@ -4,25 +4,15 @@ import Link from 'next/link';
 import propTypes from 'prop-types';
 import moment from 'moment';
 
-import thunk from 'redux-thunk';
 import withRedux from 'next-redux-wrapper';
-import { createStore, combineReducers, bindActionCreators, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { bindActionCreators } from 'redux';
 
+import initStore from '../store';
 import Layout from '../components/Layout.js';
-import posts from '../reducers/posts';
 
 import { baseURL } from '../api';
 import { getPosts } from '../reducers/posts';
 import { spliceText } from '../common';
-
-const makeStore = (initialState) =>
-  createStore(combineReducers({
-      posts,
-    }),
-    initialState,
-    composeWithDevTools(applyMiddleware(thunk))
-  );
 
 class Posts extends Component {
 
@@ -116,9 +106,9 @@ class Posts extends Component {
           </div>
         </div>
         <Layout>
-          <h1 className="posts-page__subtitle">
-            Recent Posts
-          </h1>
+          <h3 className="posts-page__subtitle">
+            Recent <span style={{ color: '#FFCD21' }}>Posts</span>
+          </h3>
           <div className="posts-page__posts-wrapper">
             {posts.length > 0 ?
               this.renderPosts(posts)
@@ -148,6 +138,7 @@ class Posts extends Component {
             text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
           }
           .posts-page__subtitle {
+            font-size: 40px;
             margin: 50px 0;
             position: relative;
           }
@@ -182,8 +173,6 @@ Posts.propTypes = {
   posts: propTypes.array.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  getPosts,
-}, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ getPosts }, dispatch);
 
-export default withRedux(makeStore, null, mapDispatchToProps)(Posts);
+export default withRedux(initStore, null, mapDispatchToProps)(Posts);

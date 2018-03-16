@@ -1,28 +1,15 @@
 import React, { Component } from 'react';
-import { createStore, combineReducers, bindActionCreators, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 import Link from 'next/link';
 import withRedux from 'next-redux-wrapper';
-import { reducer as formReducer } from 'redux-form';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import initStore from '../store';
 import { Button } from 'reactstrap';
 
 import Container from '../components/Container';
 import CreatePostForm from '../components/CreatePostForm';
 
-import reducer from '../reducers/adminPanel';
-
 import { createPost } from '../reducers/adminPanel';
-
-const makeStore = (initialState, options) =>
-  createStore(combineReducers({
-      reducer,
-      form: formReducer,
-    }),
-    initialState,
-    composeWithDevTools(applyMiddleware(thunk))
-  );
 
 class AdminPanel extends Component {
   state = {
@@ -95,4 +82,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   createPost,
 }, dispatch);
 
-export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(AdminPanel);
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(AdminPanel);
