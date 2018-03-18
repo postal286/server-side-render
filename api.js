@@ -13,5 +13,6 @@ export default class api {
     const formData = new FormData();
     formData.append('image', file);
     return axios.post('/api/uploads', formData, config);
-  }
+  };
+  static fetchAllPosts = () => axios.get('/api/posts-all');
 };

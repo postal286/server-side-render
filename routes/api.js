@@ -6,6 +6,7 @@ const path = require('path');
 const uuidv1 = require('uuid/v1');
 const mimetypes = require('../common').mimetypes;
 const Includes = require('lodash').includes;
+const jwt = require('jsonwebtoken');
 
 module.exports = function (server) {
 
@@ -17,6 +18,18 @@ module.exports = function (server) {
       .exec(function (err, posts) {
         res.status(200).json({ posts });
       });
+  });
+
+  server.get('/api/posts-all', function (req, res) {
+    if(req.headers.token) {
+      console.log('jwt.decode(req.headers.token)', jwt.decode(req.headers.token));
+    }
+    // Post
+    //   .find()
+    //   .sort({ created_at: -1 })
+    //   .exec(function (err, posts) {
+    //     res.status(200).json({ posts });
+    //   });
   });
 
   server.get('/api/post/:id', function (req, res) {

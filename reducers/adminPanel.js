@@ -16,6 +16,13 @@ export const createPost = (values) => (dispatch) =>
       return api.createPost({ ...rest, img });
     });
 
+export const fetchAllPosts = () => (dispatch) => {
+  return api.fetchAllPosts()
+    .then((res) => {
+      console.log('res', res);
+    });
+};
+
 const ACTION_HANDLERS = {
   [actionTypes.FETCHING]: (state, action) => state,
 };

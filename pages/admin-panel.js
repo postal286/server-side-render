@@ -9,11 +9,15 @@ import { Button } from 'reactstrap';
 import Container from '../components/Container';
 import CreatePostForm from '../components/CreatePostForm';
 
-import { createPost } from '../reducers/adminPanel';
+import { createPost, fetchAllPosts } from '../reducers/adminPanel';
 
 class AdminPanel extends Component {
   state = {
     createPost: false,
+  };
+
+  fetchAllPosts = () => {
+    this.props.fetchAllPosts();
   };
 
   toggleEditor = () => {
@@ -63,6 +67,7 @@ class AdminPanel extends Component {
               </div>
             </Link>
           </Button>
+          <Button onClick={this.fetchAllPosts}>123</Button>
           {this.state.createPost &&
           <CreatePostForm
             onSubmit={this.onCreatePostSubmit}
@@ -79,6 +84,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+  fetchAllPosts,
   createPost,
 }, dispatch);
 
